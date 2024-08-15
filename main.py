@@ -33,57 +33,68 @@ def get_path(relative_path):
 
     return os.path.normpath(os.path.join(base_path, relative_path))
 
-content = None
 
-def read_txt_file():
-    # 弹出文件选择对话框，只显示txt文件
-    file_path = filedialog.askopenfilename(filetypes=[("Text files", "*.txt"), ("All files", "*.*")])
-    if file_path:  # 如果用户选择了文件
-        try:
-            # 读取txt文件内容
-            with open(file_path, 'r', encoding='utf-8') as file:
-                content = file.read()
-                # 显示文件内容
-                text_label1.config(text=content)
-
-                # 指定要保存内容的本地文件路径
-                save_path = 'saved_content.txt'  # 可以根据需要修改文件名和路径
-
-                # 将读取的内容写入到本地文件
-                with open(save_path, 'w', encoding='utf-8') as file:
-                    file.write(content)
-
-        except Exception as e:
-            print(f"读取文件时发生错误: {e}")
+# def read_txt_file():
+#     # 弹出文件选择对话框，只显示txt文件
+#     file_path = filedialog.askopenfilename(filetypes=[("Text files", "*.txt"), ("All files", "*.*")])
+#     if file_path:  # 如果用户选择了文件
+#         try:
+#             # 读取txt文件内容
+#             with open(file_path, 'r', encoding='utf-8') as file:
+#                 content = file.read()
+#                 # 显示文件内容
+#                 text_label1.config(text=content)
+#
+#                 # 指定要保存内容的本地文件路径
+#                 save_path = 'saved_content.txt'  # 可以根据需要修改文件名和路径
+#
+#                 # 将读取的内容写入到本地文件
+#                 with open(save_path, 'w', encoding='utf-8') as file:
+#                     file.write(content)
+#
+#         except Exception as e:
+#             print(f"读取文件时发生错误: {e}")
 
 def random_txt_file():
     try:
         # 读取txt文件内容
-        with open("saved_content.txt", 'r', encoding='utf-8') as file:
-            content = file.read()
-            # 显示文件内容
-            text_label1.config(text=content)
+        # with open("saved_content.txt", 'r', encoding='utf-8') as file:
+        #     content = file.read()
+        #     # 显示文件内容
+        #     text_label1.config(text=content)
+        #
+        #     # 指定要保存内容的本地文件路径
+        #     save_path = 'saved_content.txt'  # 可以根据需要修改文件名和路径
+        #
+        #     # 将读取的内容写入到本地文件
+        #     with open(save_path, 'w', encoding='utf-8') as file:
+        #         file.write(content)
 
-            # 指定要保存内容的本地文件路径
-            save_path = 'saved_content.txt'  # 可以根据需要修改文件名和路径
+        # 将文本按行分割成列表
+        content_text = ("地图A\n"
+                        "地图B\n"
+                        "地图C\n"
+                        "地图D\n"
+                        "地图E\n"
+                        "地图F\n"
+                        "地图G\n"
+                        "地图H\n"
+                        "地图I\n"
+                        "地图J\n")
 
-            # 将读取的内容写入到本地文件
-            with open(save_path, 'w', encoding='utf-8') as file:
-                file.write(content)
+        lines = content_text.splitlines()
 
-            # 将文本按行分割成列表
-            lines = content.splitlines()
+        # 随机选择三行
+        selected_lines = random.sample(lines, 3)
 
-            # 随机选择三行
-            selected_lines = random.sample(lines, 3)
+        # 将选中的行转换为一个字符串，并用换行符连接
+        display_text = '\n'.join(selected_lines)
 
-            # 将选中的行转换为一个字符串，并用换行符连接
-            display_text = '\n'.join(selected_lines)
-
-            # 显示选中的行
-            text_label2.config(text=display_text)
+        # 显示选中的行
+        text_label2.config(text=display_text)
     except Exception as e:
         print(f"读取文件时发生错误: {e}")
+
 
 root = tk.Tk()  # 创建窗口
 root.title("TotalWar HarmmerⅢ地图随机器")  # 更改标题
@@ -93,7 +104,17 @@ root.resizable(False, False)  # 边框大小限制
 # root.config(bg="blue")
 
 # 创建一个标签用于显示全地图内容
-text_label1 = tk.Label(root, text="地图A\n地图B", justify=tk.LEFT, font=("黑体", 20, "bold"))
+text_label1 = tk.Label(root, text="地图A\n"
+                                  "地图B\n"
+                                  "地图C\n"
+                                  "地图D\n"
+                                  "地图E\n"
+                                  "地图F\n"
+                                  "地图G\n"
+                                  "地图H\n"
+                                  "地图I\n"
+                                  "地图J\n",
+                       justify=tk.LEFT, font=("黑体", 20, "bold"))
 text_label1.pack()
 
 # 创建一个标签用于显示随机地图内容
@@ -101,8 +122,8 @@ text_label2 = tk.Label(root, text="随机地图池", justify=tk.LEFT, font=("黑
 text_label2.pack()
 
 # 添加一个按钮，用于触发读取txt文件的功能
-read_button1 = tk.Button(root, text="选择TXT文件", command=read_txt_file)
-read_button1.pack()
+# read_button1 = tk.Button(root, text="选择TXT文件", command=read_txt_file)
+# read_button1.pack()
 
 read_button2 = tk.Button(root, text="随机地图池", command=random_txt_file)
 read_button2.pack()
