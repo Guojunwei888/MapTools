@@ -1,0 +1,24 @@
+pyinstaller -w main.py
+pyinstaller -w -F --add-data assets:assets main.py
+pyinstaller -w -F --add-data assets:assets -i assets/hammer.ico main.py
+pyinstaller -w -F --add-data assets:assets -i assets/hammer.ico --splash assets/totalwar.jpg main.py
+pyinstaller -w -F --add-data assets:assets -i assets/hammer.ico --splash assets/totalwar.jpg --disable-windowed-traceback main.py
+
+
+
+
+
+
+
+
+
+
+
+
+
+pyi-makespec -w -F --add-data assets:assets -i assets/hammer.ico --splash assets/totalwar.jpg --disable-windowed-traceback main.py
+pyinstaller main.spec
+
+text_pos=(120, 40),
+text_size=12,
+text_color='blue',
